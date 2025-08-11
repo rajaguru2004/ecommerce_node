@@ -97,7 +97,7 @@ The API uses **JSON Web Tokens (JWT)** for authentication:
 # Create user with plain text password
 POST /api/users
 {
-  "username": "john_doe",
+  "username": "guru2004",
   "password": "mypassword123"
 }
 
@@ -105,7 +105,7 @@ POST /api/users
 {
   "success": true,
   "data": {
-    "username": "john_doe",
+    "username": "guru2004",
     "role": "admin",
     "createdAt": "2024-01-01T00:00:00.000Z"
   }
@@ -117,7 +117,7 @@ GET /api/users
   "success": true,
   "data": [
     {
-      "username": "john_doe",
+      "username": "guru2004",
       "password": "$2a$12$hashedpasswordstring...",
       "role": "admin",
       "createdAt": "2024-01-01T00:00:00.000Z"
@@ -132,7 +132,7 @@ GET /api/users
 curl -X POST http://localhost:3000/api/users/login \
   -H "Content-Type: application/json" \
   -d '{
-    "username": "john_doe",
+    "username": "guru2004",
     "password": "mypassword123"
   }'
 
@@ -141,7 +141,7 @@ curl -X POST http://localhost:3000/api/users/login \
   "success": true,
   "message": "Login successful",
   "data": {
-    "username": "john_doe",
+    "username": "guru2004",
     "role": "admin",
     "createdAt": "2024-01-01T00:00:00.000Z"
   },
@@ -240,7 +240,7 @@ exports.login = async (req, res) => {
 curl -X POST http://localhost:3000/api/users/login \
   -H "Content-Type: application/json" \
   -d '{
-    "username": "john_doe",
+    "username": "guru2004",
     "password": "mypassword123"
   }'
 ```
@@ -396,7 +396,7 @@ Login user (public route - no authentication required)
 curl -X POST http://localhost:3000/api/users/login \
   -H "Content-Type: application/json" \
   -d '{
-    "username": "john_doe",
+    "username": "guru2004",
     "password": "mypassword123"
   }'
 ```
@@ -422,7 +422,7 @@ curl -X POST http://localhost:3000/api/users \
   -H "Authorization: Bearer <your-jwt-token>" \
   -H "Content-Type: application/json" \
   -d '{
-    "username": "john_doe",
+    "username": "guru2004",
     "password": "securepassword123",
     "role": "user"
   }'
@@ -466,8 +466,8 @@ Create a new customer
 curl -X POST http://localhost:3000/api/customers \
   -H "Content-Type: application/json" \
   -d '{
-    "name": "Jane Smith",
-    "email": "jane@example.com",
+    "name": "guru2004",
+    "email": "guru2004@example.com",
     "phone": "+1234567890"
   }'
 ```
