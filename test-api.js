@@ -1,4 +1,4 @@
-const axios = require('axios');
+import { get, post, put } from 'axios';
 
 const BASE_URL = 'http://localhost:3000/api';
 
@@ -47,69 +47,69 @@ async function testAPI() {
     try {
         // Test root endpoint
         console.log('1. Testing root endpoint...');
-        const rootResponse = await axios.get('http://localhost:3000/');
+        const rootResponse = await get('http://localhost:3000/');
         console.log('Root endpoint working:', rootResponse.data.message);
 
         // Test Products API
         console.log('\n2. Testing Products API...');
 
         // Create product
-        const createProductResponse = await axios.post(`${BASE_URL}/products`, testProduct);
+        const createProductResponse = await post(`${BASE_URL}/products`, testProduct);
         console.log('Product created:', createProductResponse.data.data.name);
         const productId = createProductResponse.data.data._id;
 
         // Get all products
-        const getProductsResponse = await axios.get(`${BASE_URL}/products`);
+        const getProductsResponse = await get(`${BASE_URL}/products`);
         console.log('Products retrieved:', getProductsResponse.data.count, 'products');
 
         // Get product by ID
-        const getProductResponse = await axios.get(`${BASE_URL}/products/${productId}`);
+        const getProductResponse = await get(`${BASE_URL}/products/${productId}`);
         console.log('Product retrieved by ID:', getProductResponse.data.data.name);
 
         // Test Users API
         console.log('\n3. Testing Users API...');
 
         // Create user
-        const createUserResponse = await axios.post(`${BASE_URL}/users`, testUser);
+        const createUserResponse = await post(`${BASE_URL}/users`, testUser);
         console.log('User created:', createUserResponse.data.data.username);
         const userId = createUserResponse.data.data._id;
 
         // Get all users
-        const getUsersResponse = await axios.get(`${BASE_URL}/users`);
+        const getUsersResponse = await get(`${BASE_URL}/users`);
         console.log('Users retrieved:', getUsersResponse.data.count, 'users');
 
         // Test Customers API
         console.log('\n4. Testing Customers API...');
 
         // Create customer
-        const createCustomerResponse = await axios.post(`${BASE_URL}/customers`, testCustomer);
+        const createCustomerResponse = await post(`${BASE_URL}/customers`, testCustomer);
         console.log('Customer created:', createCustomerResponse.data.data.name);
         const customerId = createCustomerResponse.data.data._id;
 
         // Get all customers
-        const getCustomersResponse = await axios.get(`${BASE_URL}/customers`);
+        const getCustomersResponse = await get(`${BASE_URL}/customers`);
         console.log('Customers retrieved:', getCustomersResponse.data.count, 'customers');
 
         // Test Coupons API
         console.log('\n5. Testing Coupons API...');
 
         // Create coupon
-        const createCouponResponse = await axios.post(`${BASE_URL}/coupons`, testCoupon);
+        const createCouponResponse = await post(`${BASE_URL}/coupons`, testCoupon);
         console.log('Coupon created:', createCouponResponse.data.data.code);
 
         // Get coupon by code
-        const getCouponByCodeResponse = await axios.get(`${BASE_URL}/coupons/code/${testCoupon.code}`);
+        const getCouponByCodeResponse = await get(`${BASE_URL}/coupons/code/${testCoupon.code}`);
         console.log('Coupon retrieved by code:', getCouponByCodeResponse.data.data.name);
 
         // Test Store Settings API
         console.log('\n6. Testing Store Settings API...');
 
         // Get store settings (should create default if none exist)
-        const getStoreSettingsResponse = await axios.get(`${BASE_URL}/store-settings`);
+        const getStoreSettingsResponse = await get(`${BASE_URL}/store-settings`);
         console.log('Store settings retrieved:', getStoreSettingsResponse.data.data.storeName);
 
         // Update store settings
-        const updateStoreSettingsResponse = await axios.put(`${BASE_URL}/store-settings`, {
+        const updateStoreSettingsResponse = await put(`${BASE_URL}/store-settings`, {
             storeName: "Updated Test Store"
         });
         console.log('Store settings updated:', updateStoreSettingsResponse.data.data.storeName);

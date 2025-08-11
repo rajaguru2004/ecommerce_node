@@ -1,7 +1,7 @@
-const Customer = require("../models/customer.model");
+import Customer from "../models/customer_model.js";
 
 // Get all customers
-exports.getCustomers = async (req, res) => {
+export async function getCustomers(req, res) {
     try {
         const customers = await Customer.find({});
         res.status(200).json({
@@ -15,10 +15,10 @@ exports.getCustomers = async (req, res) => {
             message: error.message
         });
     }
-};
+}
 
 // Get customer by ID
-exports.getCustomerById = async (req, res) => {
+export async function getCustomerById(req, res) {
     try {
         const customer = await Customer.findById(req.params.id);
         if (!customer) {
@@ -37,10 +37,10 @@ exports.getCustomerById = async (req, res) => {
             message: error.message
         });
     }
-};
+}
 
 // Create new customer
-exports.createCustomer = async (req, res) => {
+export async function createCustomer(req, res) {
     try {
         const customer = await Customer.create(req.body);
         res.status(201).json({
@@ -54,10 +54,10 @@ exports.createCustomer = async (req, res) => {
             message: error.message
         });
     }
-};
+}
 
 // Update customer by ID
-exports.updateCustomer = async (req, res) => {
+export async function updateCustomer(req, res) {
     try {
         const id = req.params.id;
         const customer = await Customer.findByIdAndUpdate(id, req.body, { new: true, runValidators: true });
@@ -80,10 +80,10 @@ exports.updateCustomer = async (req, res) => {
             message: error.message
         });
     }
-};
+}
 
 // Delete customer by ID
-exports.deleteCustomer = async (req, res) => {
+export async function deleteCustomer(req, res) {
     try {
         const id = req.params.id;
         const customer = await Customer.findByIdAndDelete(id);
@@ -105,4 +105,4 @@ exports.deleteCustomer = async (req, res) => {
             message: error.message
         });
     }
-}; 
+} 

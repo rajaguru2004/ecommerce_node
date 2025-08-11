@@ -1,6 +1,6 @@
-const mongoose = require("mongoose");
+import mongoose, { model } from "mongoose";
 const { Schema } = mongoose;
-const bcrypt = require("bcryptjs");
+import { genSalt, hash } from "bcryptjs";
 
 const UserSchema = new Schema({
     username: { type: String, required: true, unique: true },
@@ -16,8 +16,8 @@ UserSchema.pre('save', async function (next) {
 
     try {
         // Hash password with salt rounds of 12
-        const salt = await bcrypt.genSalt(12);
-        this.password = await bcrypt.hash(this.password, salt);
+        const salt = await genSalt(12);
+        this.password = await hash(this.password, salt);
         next();
     } catch (error) {
         next(error);
@@ -29,8 +29,8 @@ UserSchema.pre('findOneAndUpdate', async function (next) {
     const update = this.getUpdate();
     if (update.password) {
         try {
-            const salt = await bcrypt.genSalt(12);
-            update.password = await bcrypt.hash(update.password, salt);
+            const salt = await genSalt(12);
+            update.password = await hash(update.password, salt);
         } catch (error) {
             return next(error);
         }
@@ -38,5 +38,5 @@ UserSchema.pre('findOneAndUpdate', async function (next) {
     next();
 });
 
-const User = mongoose.model('User', UserSchema);
-module.exports = User; 
+const User = model('User', UserSchema);
+export default User; 

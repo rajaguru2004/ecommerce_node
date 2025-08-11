@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+import mongoose, { model } from "mongoose";
 const { Schema } = mongoose;
 
 const CouponSchema = new Schema({
@@ -12,5 +12,5 @@ const CouponSchema = new Schema({
     createdAt: { type: Date, default: Date.now }
 });
 
-const Coupon = mongoose.model('Coupon', CouponSchema);
-module.exports = Coupon; 
+const Coupon = model('Coupon', CouponSchema);
+export default Coupon; 

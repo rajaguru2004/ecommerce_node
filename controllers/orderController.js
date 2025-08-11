@@ -1,7 +1,7 @@
-const Order = require("../models/order.model");
+import Order from "../models/order_model.js";
 
 // Get all orders
-exports.getOrders = async (req, res) => {
+export async function getOrders(req, res) {
     try {
         const orders = await Order.find({})
             .populate('customerId', 'name email')
@@ -18,10 +18,10 @@ exports.getOrders = async (req, res) => {
             message: error.message
         });
     }
-};
+}
 
 // Get order by ID
-exports.getOrderById = async (req, res) => {
+export async function getOrderById(req, res) {
     try {
         const order = await Order.findById(req.params.id)
             .populate('customerId', 'name email')
@@ -44,10 +44,10 @@ exports.getOrderById = async (req, res) => {
             message: error.message
         });
     }
-};
+}
 
 // Create new order
-exports.createOrder = async (req, res) => {
+export async function createOrder(req, res) {
     try {
         const order = await Order.create(req.body);
         const populatedOrder = await Order.findById(order._id)
@@ -65,10 +65,10 @@ exports.createOrder = async (req, res) => {
             message: error.message
         });
     }
-};
+}
 
 // Update order by ID
-exports.updateOrder = async (req, res) => {
+export async function updateOrder(req, res) {
     try {
         const id = req.params.id;
         const order = await Order.findByIdAndUpdate(id, req.body, { new: true, runValidators: true })
@@ -93,10 +93,10 @@ exports.updateOrder = async (req, res) => {
             message: error.message
         });
     }
-};
+}
 
 // Delete order by ID
-exports.deleteOrder = async (req, res) => {
+export async function deleteOrder(req, res) {
     try {
         const id = req.params.id;
         const order = await Order.findByIdAndDelete(id);
@@ -118,10 +118,10 @@ exports.deleteOrder = async (req, res) => {
             message: error.message
         });
     }
-};
+}
 
 // Update order status
-exports.updateOrderStatus = async (req, res) => {
+export async function updateOrderStatus(req, res) {
     try {
         const id = req.params.id;
         const { status } = req.body;
@@ -158,4 +158,4 @@ exports.updateOrderStatus = async (req, res) => {
             message: error.message
         });
     }
-}; 
+} 

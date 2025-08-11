@@ -1,7 +1,7 @@
-const Coupon = require("../models/coupon.model");
+import Coupon from "../models/coupon_model.js";
 
 // Get all coupons
-exports.getCoupons = async (req, res) => {
+export async function getCoupons(req, res) {
     try {
         const coupons = await Coupon.find({});
         res.status(200).json({
@@ -15,10 +15,10 @@ exports.getCoupons = async (req, res) => {
             message: error.message
         });
     }
-};
+}
 
 // Get coupon by ID
-exports.getCouponById = async (req, res) => {
+export async function getCouponById(req, res) {
     try {
         const coupon = await Coupon.findById(req.params.id);
         if (!coupon) {
@@ -37,10 +37,10 @@ exports.getCouponById = async (req, res) => {
             message: error.message
         });
     }
-};
+}
 
 // Get coupon by code
-exports.getCouponByCode = async (req, res) => {
+export async function getCouponByCode(req, res) {
     try {
         const { code } = req.params;
         const coupon = await Coupon.findOne({ code });
@@ -78,10 +78,10 @@ exports.getCouponByCode = async (req, res) => {
             message: error.message
         });
     }
-};
+}
 
 // Create new coupon
-exports.createCoupon = async (req, res) => {
+export async function createCoupon(req, res) {
     try {
         const coupon = await Coupon.create(req.body);
         res.status(201).json({
@@ -95,10 +95,10 @@ exports.createCoupon = async (req, res) => {
             message: error.message
         });
     }
-};
+}
 
 // Update coupon by ID
-exports.updateCoupon = async (req, res) => {
+export async function updateCoupon(req, res) {
     try {
         const id = req.params.id;
         const coupon = await Coupon.findByIdAndUpdate(id, req.body, { new: true, runValidators: true });
@@ -121,10 +121,10 @@ exports.updateCoupon = async (req, res) => {
             message: error.message
         });
     }
-};
+}
 
 // Delete coupon by ID
-exports.deleteCoupon = async (req, res) => {
+export async function deleteCoupon(req, res) {
     try {
         const id = req.params.id;
         const coupon = await Coupon.findByIdAndDelete(id);
@@ -146,10 +146,10 @@ exports.deleteCoupon = async (req, res) => {
             message: error.message
         });
     }
-};
+}
 
 // Increment coupon usage count
-exports.useCoupon = async (req, res) => {
+export async function useCoupon(req, res) {
     try {
         const { code } = req.params;
         const coupon = await Coupon.findOne({ code });
@@ -189,4 +189,4 @@ exports.useCoupon = async (req, res) => {
             message: error.message
         });
     }
-}; 
+} 

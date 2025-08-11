@@ -1,18 +1,18 @@
-const express = require("express");
+import express, { json, urlencoded } from "express";
 const app = express();
-const mongoose = require("mongoose");
+import { connect } from "mongoose";
 
 // Import routes
-const productRoutes = require("./routes/product.route");
-const userRoutes = require("./routes/user.route");
-const customerRoutes = require("./routes/customer.route");
-const orderRoutes = require("./routes/order.route");
-const couponRoutes = require("./routes/coupon.route");
-const storeSettingsRoutes = require("./routes/storeSettings.route");
+import productRoutes from "./routes/product_route.js";
+import userRoutes from "./routes/user_route.js";
+import customerRoutes from "./routes/customer_route.js";
+import orderRoutes from "./routes/order_route.js";
+import couponRoutes from "./routes/coupon_route.js";
+import storeSettingsRoutes from "./routes/storeSettings_route.js";
 
 // Middleware
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(json());
+app.use(urlencoded({ extended: false }));
 
 // Root route
 app.get("/", (req, res) => {
@@ -52,8 +52,7 @@ app.use("*", (req, res) => {
 });
 
 // Database connection
-mongoose
-  .connect(
+connect(
     "mongodb+srv://tara:tara2006@cluster0.vfkzn2w.mongodb.net/Node-Api?retryWrites=true&w=majority&appName=BackedDb"
   )
   .then(() => {

@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+import mongoose, { model } from "mongoose";
 const { Schema } = mongoose;
 
 const StoreSettingsSchema = new Schema({
@@ -10,5 +10,5 @@ const StoreSettingsSchema = new Schema({
     contactPhone: { type: String }
 });
 
-const StoreSettings = mongoose.model('StoreSettings', StoreSettingsSchema);
-module.exports = StoreSettings; 
+const StoreSettings = model('StoreSettings', StoreSettingsSchema);
+export default StoreSettings; 

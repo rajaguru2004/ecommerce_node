@@ -1,10 +1,11 @@
-const jwt = require("jsonwebtoken");
+import pkg from 'jsonwebtoken';
+const { verify } = pkg;
 
 // JWT secret key (should match the one in userController)
 const JWT_SECRET = "your-super-secret-jwt-key-change-in-production";
 
 // Middleware to verify JWT token
-const authenticateToken = (req, res, next) => {
+export const authenticateToken = (req, res, next) => {
     const authHeader = req.headers['authorization'];
     const token = authHeader && authHeader.split(' ')[1]; // Bearer TOKEN
 
@@ -15,7 +16,7 @@ const authenticateToken = (req, res, next) => {
         });
     }
 
-    jwt.verify(token, JWT_SECRET, (err, user) => {
+    verify(token, JWT_SECRET, (err, user) => {
         if (err) {
             return res.status(403).json({
                 success: false,
@@ -28,7 +29,7 @@ const authenticateToken = (req, res, next) => {
 };
 
 // Middleware to check if user is admin
-const requireAdmin = (req, res, next) => {
+export const requireAdmin = (req, res, next) => {
     if (req.user.role !== 'admin') {
         return res.status(403).json({
             success: false,
@@ -37,8 +38,3 @@ const requireAdmin = (req, res, next) => {
     }
     next();
 };
-
-module.exports = {
-    authenticateToken,
-    requireAdmin
-}; 

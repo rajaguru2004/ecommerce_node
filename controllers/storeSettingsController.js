@@ -1,7 +1,7 @@
-const StoreSettings = require("../models/storeSettings.model");
+import StoreSettings from "../models/storeSettings_model.js";
 
 // Get store settings
-exports.getStoreSettings = async (req, res) => {
+export async function getStoreSettings(req, res) {
     try {
         let settings = await StoreSettings.findById('store-1');
 
@@ -27,10 +27,10 @@ exports.getStoreSettings = async (req, res) => {
             message: error.message
         });
     }
-};
+}
 
 // Create store settings
-exports.createStoreSettings = async (req, res) => {
+export async function createStoreSettings(req, res) {
     try {
         const settings = await StoreSettings.create({
             _id: 'store-1',
@@ -48,10 +48,10 @@ exports.createStoreSettings = async (req, res) => {
             message: error.message
         });
     }
-};
+}
 
 // Update store settings
-exports.updateStoreSettings = async (req, res) => {
+export async function updateStoreSettings(req, res) {
     try {
         const settings = await StoreSettings.findByIdAndUpdate(
             'store-1',
@@ -70,10 +70,10 @@ exports.updateStoreSettings = async (req, res) => {
             message: error.message
         });
     }
-};
+}
 
 // Delete store settings
-exports.deleteStoreSettings = async (req, res) => {
+export async function deleteStoreSettings(req, res) {
     try {
         const settings = await StoreSettings.findByIdAndDelete('store-1');
 
@@ -94,4 +94,4 @@ exports.deleteStoreSettings = async (req, res) => {
             message: error.message
         });
     }
-}; 
+} 

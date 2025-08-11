@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+import mongoose, { model } from "mongoose";
 const { Schema } = mongoose;
 
 const CustomerSchema = new Schema({
@@ -9,5 +9,5 @@ const CustomerSchema = new Schema({
     createdAt: { type: Date, default: Date.now }
 });
 
-const Customer = mongoose.model('Customer', CustomerSchema);
-module.exports = Customer; 
+const Customer = model('Customer', CustomerSchema);
+export default Customer; 
